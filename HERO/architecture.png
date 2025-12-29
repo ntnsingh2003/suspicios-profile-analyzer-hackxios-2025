@@ -1,0 +1,69 @@
+# System Architecture: Suspicious Profile Analyzer
+
+## High-Level Data Flow
+
+```
+User Input → React UI → FastAPI Backend → ML/NLP Engine → Risk Scoring → Dashboard Output
+```
+
+## Detailed Component Architecture
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Profile Data  │───▶│  Profile Analyzer │───▶│  Risk Assessment│
+│   (JSON Input)  │    │                  │    │  (0-100 + Why)  │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+                              │
+                    ┌─────────┼─────────┐
+                    ▼         ▼         ▼
+            ┌──────────┐ ┌──────────┐ ┌──────────┐
+            │Metadata  │ │Content   │ │Risk      │
+            │Validator │ │Classifier│ │Scorer    │
+            └──────────┘ └──────────┘ └──────────┘
+                    │         │         │
+                    ▼         ▼         ▼
+            ┌──────────┐ ┌──────────┐ ┌──────────┐
+            │Rule      │ │TF-IDF +  │ │Hybrid    │
+            │Engine    │ │Keywords  │ │Combiner  │
+            └──────────┘ └──────────┘ └──────────┘
+                    │         │         │
+                    └─────────┼─────────┘
+                              ▼
+                    ┌──────────────────┐
+                    │ Explainability   │
+                    │ Module           │
+                    └──────────────────┘
+                              │
+                              ▼
+                    ┌──────────────────┐
+                    │ JSON Response    │
+                    │ with Explanations│
+                    └──────────────────┘
+```
+
+## Component Responsibilities
+
+**React UI**: User interface for profile input, demo data loading, and risk assessment display with color-coded risk levels and human-readable explanations
+
+**FastAPI Backend**: REST API with automatic OpenAPI documentation, input validation, error handling, and JSON request/response processing
+
+**Profile Analyzer**: Core orchestrator that coordinates analysis pipeline, manages data flow between components, and aggregates results
+
+**Metadata Validator**: Analyzes profile metadata (account age, follower ratios, posting frequency, profile completeness) using rule-based logic
+
+**Content Classifier**: Processes message content using TF-IDF vectorization, keyword pattern matching, and basic sentiment analysis for scam detection
+
+**Risk Scorer**: Combines rule-based (60%) and ML (40%) outputs into final explainable risk score with confidence assessment
+
+**Explainability Module**: Generates human-readable explanations for risk factors, translates technical scores into user-friendly language
+
+## Technology Stack
+
+- **Frontend**: React + TypeScript for type safety and modern UI development
+- **Backend**: Python + FastAPI for rapid API development with automatic documentation
+- **ML/AI**: scikit-learn Random Forest, TF-IDF vectorization, regex pattern matching
+- **Data Processing**: NumPy and pandas for efficient numerical computation and data manipulation
+
+## Design Philosophy
+
+Clarity prioritized over visual complexity. Each component has single responsibility with clear input/output contracts. Explainability built into every layer rather than added as afterthought. Architecture supports both hackathon demonstration and production scaling requirements.

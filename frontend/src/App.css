@@ -1,0 +1,494 @@
+/* Suspicious Profile Analyzer - Clean, Professional Styling */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.App-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.App-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.App-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Demo Section */
+.demo-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.demo-section h3 {
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.demo-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.demo-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.demo-btn.legitimate {
+  background-color: #28a745;
+  color: white;
+}
+
+.demo-btn.legitimate:hover {
+  background-color: #218838;
+}
+
+.demo-btn.suspicious {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.demo-btn.suspicious:hover {
+  background-color: #e0a800;
+}
+
+.demo-btn.high-risk {
+  background-color: #dc3545;
+  color: white;
+}
+
+.demo-btn.high-risk:hover {
+  background-color: #c82333;
+}
+
+/* Analysis Container */
+.analysis-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .analysis-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Input Section */
+.input-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.input-section h2 {
+  margin-bottom: 1.5rem;
+  color: #495057;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.form-group input[type="number"],
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input[type="number"]:focus,
+.form-group input[type="text"]:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: scale(1.2);
+}
+
+/* Message Inputs */
+.message-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  align-items: flex-start;
+}
+
+.message-input textarea {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 60px;
+  transition: border-color 0.2s ease;
+}
+
+.message-input textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+.add-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.add-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Analyze Button */
+.analyze-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.analyze-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.analyze-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Results Section */
+.results-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  min-height: 400px;
+}
+
+.results-section h2 {
+  margin-bottom: 1.5rem;
+  color: #495057;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 0.5rem;
+}
+
+/* Error Display */
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 1rem;
+}
+
+/* Assessment Results */
+.assessment-results {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Threat Overview */
+.threat-overview {
+  margin-bottom: 2rem;
+}
+
+.risk-score {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border: 6px solid;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.score-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.risk-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.risk-info p {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin: 0.25rem 0;
+}
+
+.confidence-explanation {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #495057;
+}
+
+/* Threat Indicators */
+.threat-indicators, .security-actions {
+  margin-bottom: 2rem;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.threat-indicators h4, .security-actions h4 {
+  background: #667eea;
+  color: white;
+  padding: 1rem 1.5rem;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.threat-indicators ul, .security-actions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.threat-indicators li, .security-actions li {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #f8f9fa;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.threat-indicators li:last-child, .security-actions li:last-child {
+  border-bottom: none;
+}
+
+.threat-indicators li:nth-child(even), .security-actions li:nth-child(even) {
+  background: #f8f9fa;
+}
+
+.action-item {
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Security Actions specific styling */
+.security-actions h4 {
+  background: #28a745;
+}
+
+.security-actions li {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.security-actions li:before {
+  content: "→";
+  position: absolute;
+  left: 1rem;
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Explanations - Legacy support */
+.explanations {
+  margin-bottom: 2rem;
+}
+
+.explanations h4 {
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.explanations ul {
+  list-style: none;
+  padding: 0;
+}
+
+.explanations li {
+  background: #f8f9fa;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  border-left: 4px solid #667eea;
+  font-size: 0.95rem;
+}
+
+/* Methodology */
+.methodology {
+  background: #e7f3ff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #b8daff;
+}
+
+.methodology h4 {
+  margin-bottom: 0.75rem;
+  color: #004085;
+}
+
+.methodology p {
+  color: #004085;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Placeholder */
+.placeholder {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6c757d;
+}
+
+.placeholder p {
+  font-size: 1.1rem;
+}
+
+/* Footer */
+.footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.footer a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
