@@ -1,48 +1,79 @@
 # Deployment Guide: Suspicious Profile Analyzer
 
-## 🚀 Complete Deployment Process
+## 🚀 Clean Architecture
 
 This project uses a **separated architecture**:
-- **Frontend**: Deployed on Vercel (static hosting)
-- **Backend**: Deployed on Render/Railway/Fly.io (ML dependencies support)
+- **Frontend**: React TypeScript → Deploy to Vercel
+- **Backend**: Flask Python → Deploy to Render/Railway
 
-### Step 1: Deploy Backend to Render
+## 📁 Project Structure
 
-**Option A: Using Render Dashboard**
-1. Go to [render.com](https://render.com) and sign up/login
-2. Click "New" → "Web Service"
-3. Connect your GitHub repository
-4. Configure:
-   - **Name**: `suspicious-profile-analyzer-backend`
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `cd backend && python main.py`
-   - **Plan**: Free (sufficient for hackathon demo)
-5. Click "Create Web Service"
-6. **Note your backend URL**: `https://suspicious-profile-analyzer-backend.onrender.com`
+```
+suspicious-profile-analyzer/
+├── frontend/                # React TypeScript application
+│   ├── src/
+│   ├── public/
+│   └── package.json
+├── backend/                 # Flask Python API
+│   ├── main.py             # Flask application
+│   ├── requirements.txt    # Python dependencies
+│   ├── Procfile           # Deployment configuration
+│   └── runtime.txt        # Python version
+├── .kiro/                  # Kiro planning documents
+├── HERO/                   # Strategic summaries
+└── README.md
+```
 
-**Option B: Using render.yaml (Infrastructure as Code)**
-1. The `render.yaml` file is already configured
-2. Connect your repo to Render
-3. It will automatically deploy using the configuration
+## 🎯 Backend Deployment (Flask)
 
-### Step 2: Deploy Frontend to Vercel
+### Deploy to Render
 
-1. **Connect Repository**:
-   - Go to [vercel.com/dashboard](https://vercel.com/dashboard)
-   - Click "New Project" → Import your GitHub repo
-   - **Framework Preset**: "Create React App"
-   - **Root Directory**: `./` (keep default)
-   - **Build Command**: `cd frontend && npm run build`
-   - **Output Directory**: `frontend/build`
+1. **Create Web Service**:
+   - Go to [render.com](https://render.com)
+   - New → Web Service → Connect GitHub repo
+   - **Root Directory**: `backend`
 
-2. **Configure Environment Variables**:
-   - In Vercel dashboard → Project Settings → Environment Variables
-   - Add: `REACT_APP_API_BASE_URL` = `https://your-backend-url.onrender.com`
-   - **Important**: Replace with your actual Render backend URL
-   - Click "Save" and redeploy
+2. **Configuration**:
+   ```
+   Name: suspicious-profile-analyzer-backend
+   Environment: Python 3
+   Root Directory: backend
+   Build Command: pip install -r requirements.txt
+   Start Command: gunicorn main:app --bind 0.0.0.0:$PORT
+   Plan: Free
+   ```
 
-### Step 3: Test Complete Integration
+3. **Get Backend URL**: `https://[your-service].onrender.com`
+
+### Backend Stack
+- **Flask 2.3.3** - Web framework
+- **Flask-CORS 4.0.0** - Cross-origin support
+- **gunicorn 20.1.0** - WSGI server
+- **Python 3.11.9** - Runtime
+
+## 🎯 Frontend Deployment (React)
+
+### Deploy to Vercel
+
+1. **Create Project**:
+   - Go to [vercel.com](https://vercel.com)
+   - New Project → Import GitHub repo
+   - **Root Directory**: `frontend`
+
+2. **Configuration**:
+   ```
+   Framework: Create React App
+   Root Directory: frontend
+   Build Command: npm run build
+   Output Directory: build
+   ```
+
+3. **Environment Variables**:
+   ```
+   REACT_APP_API_BASE_URL = https://[your-backend].onrender.com
+   ```
+
+## 🧪 Testing Integration
 
 1. **Backend Health Check**:
    ```bash
@@ -51,30 +82,32 @@ This project uses a **separated architecture**:
 
 2. **Frontend Test**:
    - Visit your Vercel URL
-   - Click "Load Legitimate Profile" demo button
+   - Click "Load Romance Scam Profile"
    - Click "Analyze Profile for Threats"
-   - Should see risk assessment results
+   - Verify risk assessment results
 
-### Alternative Backend Platforms
+## 🔧 Local Development
 
-**Railway** (Recommended for ease):
+### Backend
 ```bash
-# Install Railway CLI
-npm install -g @railway/cli
-
-# Deploy
-railway login
-railway init
-railway up
+cd backend
+pip install -r requirements.txt
+python main.py
+# Server runs on http://localhost:8000
 ```
 
-**Fly.io** (Docker-based):
+### Frontend
 ```bash
-# Install Fly CLI
-# Create fly.toml configuration
-fly launch --no-deploy
-fly deploy
+cd frontend
+echo "REACT_APP_API_BASE_URL=http://localhost:8000" > .env.local
+npm install
+npm start
+# App runs on http://localhost:3000
 ```
+
+---
+
+**Ready for hackathon demonstration!** 🎉
 # - Project name: suspicious-profile-analyzer
 # - Directory: ./
 # - Override settings? N

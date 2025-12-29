@@ -125,21 +125,19 @@ The system demonstrates explainable cybersecurity AI with complete transparency 
 
 ### Deployment
 
-**Status**: 🚀 **Deployment Ready**
+**Status**: 🚀 **Ready for Production**
 
-This project uses separated architecture optimized for hackathon demos:
-- **Frontend**: Vercel (static hosting, global CDN)
-- **Backend**: Render/Railway/Fly.io (ML dependencies support)
+### Quick Deploy
+1. **Backend**: Deploy `backend/` folder to [Render](https://render.com)
+2. **Frontend**: Deploy `frontend/` folder to [Vercel](https://vercel.com)
+3. **Connect**: Set `REACT_APP_API_BASE_URL` environment variable in Vercel
 
-**Quick Deploy**:
-1. Backend → [Render](https://render.com) (free tier, 5-minute setup)
-2. Frontend → [Vercel](https://vercel.com) (set `REACT_APP_API_BASE_URL` env var)
-3. Complete guide → [DEPLOYMENT.md](DEPLOYMENT.md) & [deploy.md](deploy.md)
+### Architecture
+- **Backend**: Flask + Python (in `backend/` folder)
+- **Frontend**: React + TypeScript (in `frontend/` folder)
+- **Deployment**: Separated for optimal performance
 
-**Expected URLs**:
-- Frontend: `https://suspicious-profile-analyzer.vercel.app`
-- Backend: `https://suspicious-profile-analyzer-backend.onrender.com`
-- API Docs: `https://[backend-url]/docs`
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions.
 
 ---
 
