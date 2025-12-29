@@ -24,7 +24,20 @@ Due to ML dependencies exceeding Vercel's 250MB serverless limit, this project d
 1. Create Web Service on Render
 2. Build Command: `pip install -r requirements.txt`
 3. Start Command: `cd backend && python main.py`
-4. Update frontend API URLs to backend domain
+4. Note your backend URL (e.g., `https://your-app.onrender.com`)
+
+### Frontend Configuration
+
+**Environment Variables for Vercel:**
+1. In Vercel dashboard → Project Settings → Environment Variables
+2. Add: `REACT_APP_API_BASE_URL` = `https://your-backend-url.com`
+3. Redeploy frontend to apply changes
+
+**Local Development:**
+```bash
+# Create frontend/.env.local
+echo "REACT_APP_API_BASE_URL=http://localhost:8000" > frontend/.env.local
+```
 # - Project name: suspicious-profile-analyzer
 # - Directory: ./
 # - Override settings? N

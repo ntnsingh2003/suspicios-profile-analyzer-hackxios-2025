@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
 
+// API configuration
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+
 // Type definitions matching backend API
 interface ProfileData {
   account_age_days: number;
@@ -82,11 +85,7 @@ const App: React.FC = () => {
   // Load demo data
   const loadDemoData = async (type: 'legitimate' | 'suspicious' | 'romance_scam') => {
     try {
-      const apiUrl = process.env.NODE_ENV === 'production' 
-        ? '/api/demo-data' 
-        : 'http://localhost:8000/demo-data';
-      
-      const response = await fetch(apiUrl);
+      const response = await fetch(`${API_BASE_URL}/demo-data`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch demo data');
@@ -147,11 +146,7 @@ const App: React.FC = () => {
         messages: filteredMessages
       };
 
-      const apiUrl = process.env.NODE_ENV === 'production' 
-        ? '/api/analyze-profile' 
-        : 'http://localhost:8000/analyze-profile';
-
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${API_BASE_URL}/analyze-profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -180,7 +175,7 @@ const App: React.FC = () => {
     } catch (err) {
       console.error('Analysis error:', err);
       const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred';
-      setError(`Analysis failed: ${errorMessage}. Please check if the backend server is running on http://localhost:8000`);
+      setError(`Analysis failed: ${errorMessage}. Please check if the backend server is running at ${API_BASE_URL}`);
     } finally {
       setLoading(false);
     }

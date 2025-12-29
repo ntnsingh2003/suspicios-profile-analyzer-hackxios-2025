@@ -109,6 +109,7 @@ python main.py
 **Frontend (React)**:
 ```bash
 cd frontend
+echo "REACT_APP_API_BASE_URL=http://localhost:8000" > .env.local
 npm install
 npm start
 # App runs on http://localhost:3000
@@ -116,7 +117,9 @@ npm start
 
 ### Live Demo
 
-🌐 **Deployed on Vercel**: [suspicious-profile-analyzer.vercel.app](https://suspicious-profile-analyzer.vercel.app)
+🌐 **Frontend**: Deploy on Vercel  
+🔧 **Backend**: Deploy separately on Render/Railway/Fly.io  
+⚙️ **Configuration**: Set `REACT_APP_API_BASE_URL` environment variable
 
 The system demonstrates explainable cybersecurity AI with complete transparency in decision-making. Every risk assessment includes specific reasons and actionable recommendations, making it suitable for both end-user protection and platform operator compliance needs.
 
