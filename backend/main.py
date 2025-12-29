@@ -31,7 +31,10 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",  # React dev server
         "https://*.vercel.app",   # Vercel deployments
-        "https://suspicious-profile-analyzer.vercel.app"  # Production domain
+        "https://suspicious-profile-analyzer.vercel.app",  # Production domain
+        "https://*.onrender.com", # Render deployments
+        "https://*.railway.app",  # Railway deployments
+        "https://*.fly.dev"       # Fly.io deployments
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -178,8 +181,8 @@ class MLEngine:
     
     def __init__(self):
         self.model = RandomForestClassifier(
-            n_estimators=50,  # Smaller for faster training
-            max_depth=8,
+            n_estimators=30,  # Reduced for memory efficiency on free tier
+            max_depth=6,      # Reduced depth for faster inference
             random_state=42,
             class_weight='balanced'
         )
@@ -488,7 +491,9 @@ async def get_demo_data():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 # Vercel handler
 handler = app

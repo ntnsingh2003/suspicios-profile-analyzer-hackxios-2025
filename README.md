@@ -125,7 +125,21 @@ The system demonstrates explainable cybersecurity AI with complete transparency 
 
 ### Deployment
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions on Vercel.
+**Status**: 🚀 **Deployment Ready**
+
+This project uses separated architecture optimized for hackathon demos:
+- **Frontend**: Vercel (static hosting, global CDN)
+- **Backend**: Render/Railway/Fly.io (ML dependencies support)
+
+**Quick Deploy**:
+1. Backend → [Render](https://render.com) (free tier, 5-minute setup)
+2. Frontend → [Vercel](https://vercel.com) (set `REACT_APP_API_BASE_URL` env var)
+3. Complete guide → [DEPLOYMENT.md](DEPLOYMENT.md) & [deploy.md](deploy.md)
+
+**Expected URLs**:
+- Frontend: `https://suspicious-profile-analyzer.vercel.app`
+- Backend: `https://suspicious-profile-analyzer-backend.onrender.com`
+- API Docs: `https://[backend-url]/docs`
 
 ---
 

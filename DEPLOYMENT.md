@@ -1,42 +1,79 @@
 # Deployment Guide: Suspicious Profile Analyzer
 
-## 🚀 Frontend-Only Vercel Deployment
+## 🚀 Complete Deployment Process
 
-Due to ML dependencies exceeding Vercel's 250MB serverless limit, this project deploys the frontend on Vercel and requires a separate backend deployment.
+This project uses a **separated architecture**:
+- **Frontend**: Deployed on Vercel (static hosting)
+- **Backend**: Deployed on Render/Railway/Fly.io (ML dependencies support)
 
-### Vercel (Frontend Only)
+### Step 1: Deploy Backend to Render
+
+**Option A: Using Render Dashboard**
+1. Go to [render.com](https://render.com) and sign up/login
+2. Click "New" → "Web Service"
+3. Connect your GitHub repository
+4. Configure:
+   - **Name**: `suspicious-profile-analyzer-backend`
+   - **Environment**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `cd backend && python main.py`
+   - **Plan**: Free (sufficient for hackathon demo)
+5. Click "Create Web Service"
+6. **Note your backend URL**: `https://suspicious-profile-analyzer-backend.onrender.com`
+
+**Option B: Using render.yaml (Infrastructure as Code)**
+1. The `render.yaml` file is already configured
+2. Connect your repo to Render
+3. It will automatically deploy using the configuration
+
+### Step 2: Deploy Frontend to Vercel
 
 1. **Connect Repository**:
    - Go to [vercel.com/dashboard](https://vercel.com/dashboard)
    - Click "New Project" → Import your GitHub repo
-   - Framework: "Create React App"
-   - Build Command: `npm run build`
-   - Output Directory: `frontend/build`
+   - **Framework Preset**: "Create React App"
+   - **Root Directory**: `./` (keep default)
+   - **Build Command**: `cd frontend && npm run build`
+   - **Output Directory**: `frontend/build`
 
-### Backend Deployment (Required Separately)
+2. **Configure Environment Variables**:
+   - In Vercel dashboard → Project Settings → Environment Variables
+   - Add: `REACT_APP_API_BASE_URL` = `https://your-backend-url.onrender.com`
+   - **Important**: Replace with your actual Render backend URL
+   - Click "Save" and redeploy
 
-**Recommended Platforms for ML Backend:**
-- **Render**: Free tier supports up to 512MB
-- **Railway**: Full ML stack support
-- **Fly.io**: Docker-based deployment
+### Step 3: Test Complete Integration
 
-**Backend Setup (Render Example)**:
-1. Create Web Service on Render
-2. Build Command: `pip install -r requirements.txt`
-3. Start Command: `cd backend && python main.py`
-4. Note your backend URL (e.g., `https://your-app.onrender.com`)
+1. **Backend Health Check**:
+   ```bash
+   curl https://your-backend-url.onrender.com/
+   ```
 
-### Frontend Configuration
+2. **Frontend Test**:
+   - Visit your Vercel URL
+   - Click "Load Legitimate Profile" demo button
+   - Click "Analyze Profile for Threats"
+   - Should see risk assessment results
 
-**Environment Variables for Vercel:**
-1. In Vercel dashboard → Project Settings → Environment Variables
-2. Add: `REACT_APP_API_BASE_URL` = `https://your-backend-url.com`
-3. Redeploy frontend to apply changes
+### Alternative Backend Platforms
 
-**Local Development:**
+**Railway** (Recommended for ease):
 ```bash
-# Create frontend/.env.local
-echo "REACT_APP_API_BASE_URL=http://localhost:8000" > frontend/.env.local
+# Install Railway CLI
+npm install -g @railway/cli
+
+# Deploy
+railway login
+railway init
+railway up
+```
+
+**Fly.io** (Docker-based):
+```bash
+# Install Fly CLI
+# Create fly.toml configuration
+fly launch --no-deploy
+fly deploy
 ```
 # - Project name: suspicious-profile-analyzer
 # - Directory: ./
